@@ -9,15 +9,16 @@ end
 def get_choices
   begin
    puts 'Please, enter your selection (p|r|s):'
-   player_choice = gets.chomp.downcase
+   player_choice = gets[0].downcase
   end until CHOICES.keys.include?(player_choice)
 
   computer_choice = CHOICES.keys.sample
-  return player_choice, computer_choice
+  [player_choice, computer_choice]
 end
 
 def decide_winner(player_choice, computer_choice)
   if player_choice == computer_choice
+    show_choices(player_choice,computer_choice)
     puts "It's a tie!"
   elsif player_choice == 'r' && computer_choice == 's'
     show_choices(player_choice,computer_choice)
@@ -38,5 +39,5 @@ loop do
   player_choice, computer_choice = get_choices
   decide_winner(player_choice, computer_choice)
   puts 'Do you want to play again? (Y|N)'
-  break if gets.chomp.downcase != 'y'
+  break if gets[0].downcase != 'y'
 end
